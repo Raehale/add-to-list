@@ -66,11 +66,31 @@ function appendItemToShoppingListEl(item) {
     newEl.addEventListener("click", function() {
         let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
 
-        shoppingListInDB.instance
-            .collection("top-level-collection")
-            .doc("document-id-1")
-            .collection("nested-subcollection")
-            .doc("document-id-2")
+        // shoppingListInDB.instance
+        //     .collection("top-level-collection")
+        //     .doc("document-id-1")
+        //     .collection("nested-subcollection")
+        //     .doc("document-id-2")
+        const subItemListInDB = ref(database, exactLocationOfItemInDB)
+
+        onValue(subItemListInDB, function(snapshot) {
+            if (snapshot.exists()) {
+                let itemsArray = Object.entries(snapshot.val())
+            
+                clearShoppingListEl()
+                
+                for (let i = 0; i < itemsArray.length; i++) {
+                    let currentItem = itemsArray[i]
+                    let currentItemID = currentItem[0]
+                    let currentItemValue = currentItem[1]
+                    
+                    appendItemToShoppingListEl(currentItem)
+                }    
+            } else {
+                shoppingListEl.innerHTML = "No items here... yet"
+            }
+        })
+            
         
         // remove(exactLocationOfItemInDB)
     })
