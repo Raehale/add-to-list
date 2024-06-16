@@ -74,6 +74,7 @@ function appendItemToShoppingListEl(item) {
         const subItemListInDB = ref(database, exactLocationOfItemInDB)
 
         onValue(subItemListInDB, function(snapshot) {
+            console.log(subItemListInDB)
             if (snapshot.exists()) {
                 let itemsArray = Object.entries(snapshot.val())
             
