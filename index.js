@@ -72,9 +72,8 @@ function appendItemToShoppingListEl(item) {
         //     .collection("nested-subcollection")
         //     .doc("document-id-2")
         const subItemListInDB = ref(database, exactLocationOfItemInDB)
-
+        console.log(subItemListInDB)
         onValue(subItemListInDB, function(snapshot) {
-            console.log(subItemListInDB)
             if (snapshot.exists()) {
                 let itemsArray = Object.entries(snapshot.val())
             
