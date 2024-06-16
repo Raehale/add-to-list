@@ -55,10 +55,24 @@ function appendItemToShoppingListEl(item) {
     
     newEl.textContent = itemValue
     
-    newEl.addEventListener("click", function() {
+    //removes item on double click
+    newEl.addEventListener("dblclick", function() {
         let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`)
         
         remove(exactLocationOfItemInDB)
+    })
+
+    //adds sub list on single click
+    newEl.addEventListener("click", function() {
+        let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
+
+        shoppingListInDB.instance
+            .collection("top-level-collection")
+            .doc("document-id-1")
+            .collection("nested-subcollection")
+            .doc("document-id-2")
+        
+        // remove(exactLocationOfItemInDB)
     })
     
     shoppingListEl.append(newEl)
