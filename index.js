@@ -14,9 +14,14 @@ const addButtonEl = document.getElementById("add-button")
 const shoppingListEl = document.getElementById("shopping-list")
 
 addButtonEl.addEventListener("click", function() {
-    let inputValue = inputFieldEl.value
+    // let inputValue = inputFieldEl.value
     
-    push(shoppingListInDB, inputValue)
+    // push(shoppingListInDB, inputValue)
+
+    let newSubListRef = shoppingListInDB.push();
+    newSubListRef.key = 'test';
+    newSubListRef.set({});
+    
     
     clearInputFieldEl()
 })
